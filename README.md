@@ -12,15 +12,15 @@
 
 - [Información general](#info-general)
 - [Objetivo del proyecto](#objetivo)
-- [Arquitectura del framework](#arquitectura)
 - [Metodología implementada](#metodologia)
-- [Entorno de desarrollo](#entorno)
-- [Uso del framework](#uso)
 - [Índices de confiabilidad](#indices)
-- [Parámetros configurables](#parametros)
-- [Importante](#importante)
+- [Entorno de desarrollo](#entorno)
+- [Arquitectura del framework](#arquitectura)
 - [Estructura del repositorio](#estructura)
 - [Archivos proporcionados](#archivos)
+- [Uso del framework](#uso)
+- [Parámetros configurables](#parametros)
+- [Salida en consola](#salida)
 - [Autora](#autora)
 
 ---
@@ -56,33 +56,31 @@ Jerárquico I), analizando:
 
 ---
 
-<a id="arquitectura"></a>
-## 🏗 Arquitectura del framework
-
-<p align="justify">
-El framework sigue una arquitectura modular compuesta por:
-</p>
-
-<p align="justify">
-1. <strong>Capa de datos</strong>: carga del sistema IEEE RTS-24 y perfiles renovables.<br>
-2. <strong>Capa probabilística</strong>: modelado de fallas de generación y variables FNCER.<br>
-3. <strong>Motor Monte Carlo</strong>: simulación no secuencial en HL-I.<br>
-4. <strong>Integración PEM (2m+1)</strong>: tratamiento probabilístico de renovables.<br>
-5. <strong>Capa estadística</strong>: estimación de índices de confiabilidad.<br>
-6. <strong>Capa de ejecución</strong>: scripts que configuran escenarios.
-</p>
-
----
-
 <a id="metodologia"></a>
 ## 👩‍💻 Metodología implementada
 
 <p align="justify">
 - Simulación Monte Carlo no secuencial (HL-I).<br>
-- Truncamiento del espacio de estados (ej. K ≤ 2).<br>
+- Truncamiento del espacio de estados de generación (ej. K ≤ 2).<br>
 - Integración FNCER mediante Point Estimate Method (PEM – 2m+1).<br>
 - Estimación estadística con control de error relativo.
 </p>
+
+---
+
+<a id="indices"></a>
+## 📊 Índices de confiabilidad
+
+<p align="justify">
+A partir de la metodología se estiman los principales índices clásicos de confiabilidad del sistema de generación, los cuales se describen a continuación:
+</p>
+
+| Índice | Definición | Unidad |
+|--------|------------|--------|
+| E[DNS] | Valor esperado de la demanda no suministrada | MW |
+| LOLP | Probabilidad de pérdida de carga | - |
+| LOLE | Expectativa de pérdida de carga = LOLP × h_periodo | horas/año |
+| LOEE | Expectativa de pérdida de energía = E[DNS] × h_periodo | MWh/año |
 
 ---
 
@@ -102,49 +100,20 @@ Desarrollado en:
 
 ---
 
-<a id="uso"></a>
-## ▶ Uso del framework
+<a id="arquitectura"></a>
+## 🏗 Arquitectura del framework
 
 <p align="justify">
-1. Descargar o clonar el repositorio.<br>
-2. Abrir MATLAB.<br>
-3. Ejecutar uno de los scripts ubicados en la carpeta <code>SCRIPTS</code>.
+El framework sigue una arquitectura modular compuesta por:
 </p>
 
----
-
-<a id="indices"></a>
-## 📊 Índices de confiabilidad
-
-| Índice | Definición | Unidad |
-|--------|------------|--------|
-| E[DNS] | Valor esperado de la demanda no suministrada | MW |
-| LOLP | Probabilidad de pérdida de carga | - |
-| LOLE | Expectativa de pérdida de carga = LOLP × h_periodo | horas/año |
-| LOEE | Expectativa de pérdida de energía = E[DNS] × h_periodo | MWh/año |
-
----
-
-<a id="parametros"></a>
-## ⚙ Parámetros configurables
-
-| Parámetro | Descripción | Valores |
-|------------|------------|----------|
-| p_max | Demanda pico del sistema [MW] | 2850 a 3400 |
-| dn | Período del día | 1 = día, 0 = noche |
-| factor_cap | Multiplicador capacidad renovable | 1, 2, 3, ... |
-| VA | Tipo de variables FNCER | 0 = correlacionadas, 1 = independientes |
-| r | Realizaciones objetivo | 10,000 a 500,000 |
-| eps | Error relativo máximo | 0.03 a 0.10 |
-| graficar | Graficar convergencia | true / false |
-
----
-
-<a id="importante"></a>
-## ⚠ Importante
-
 <p align="justify">
-Este repositorio <strong>NO incluye la solución del taller</strong>.
+1. <strong>Capa de datos</strong>: carga del sistema IEEE RTS-24 y perfiles renovables.<br>
+2. <strong>Capa probabilística</strong>: modelado de fallas de generación y variables FNCER.<br>
+3. <strong>Motor Monte Carlo</strong>: simulación no secuencial en HL-I.<br>
+4. <strong>Integración PEM (2m+1)</strong>: tratamiento probabilístico de renovables.<br>
+5. <strong>Capa estadística</strong>: estimación de índices de confiabilidad.<br>
+6. <strong>Capa de ejecución</strong>: scripts que configuran escenarios.
 </p>
 
 ---
@@ -201,6 +170,69 @@ Este repositorio <strong>NO incluye la solución del taller</strong>.
 |----------|------------|
 | `Carga.xlsx` | Datos de la curva de carga del sistema |
 | `Solar.csv` | Perfil estadístico de generación solar |
+
+---
+
+<a id="uso"></a>
+## ▶ Uso del framework
+
+<p align="justify">
+1. Descargar o clonar el repositorio.<br>
+2. Abrir MATLAB.<br>
+3. Ejecutar uno de los scripts ubicados en la carpeta <code>SCRIPTS</code>.
+</p>
+
+---
+
+<a id="parametros"></a>
+## ⚙ Parámetros configurables
+
+| Parámetro | Descripción | Valores |
+|------------|------------|----------|
+| p_max | Demanda pico del sistema [MW] | 2850 a 3400 |
+| dn | Período del día | 1 = día, 0 = noche |
+| factor_cap | Multiplicador capacidad renovable | 1, 2, 3, ... |
+| VA | Tipo de variables FNCER | 0 = correlacionadas, 1 = independientes |
+| r | Realizaciones objetivo | 10,000 a 500,000 |
+| eps | Error relativo máximo | 0.03 a 0.10 |
+| graficar | Graficar convergencia | true / false |
+
+---
+
+<a id="salida"></a>
+## 📟 Salida en consola
+
+<p align="justify">
+Durante la ejecución, el framework imprime en consola un resumen estructurado del escenario simulado.
+</p>
+
+<p align="justify">
+En todos los casos (base y con renovables) se muestra:
+</p>
+
+<p align="justify">
+- Caracterización del sistema (capacidad instalada, demanda, margen de reserva).<br>
+- Espacio de estados de generación (N-0, N-1, N-2).<br>
+- Modelado probabilístico de la demanda.<br>
+- Progreso iterativo de la simulación Monte Carlo.<br>
+- Resultados finales y archivo <code>.mat</code> generado.
+</p>
+
+<p align="justify">
+En los escenarios con generación renovable se adiciona además:
+</p>
+
+<p align="justify">
+- Descripción del reemplazo de generación síncrona.<br>
+- Capacidad renovable instalada y factor de sobredimensionamiento.<br>
+- Caracterización estadística de las fuentes renovables.<br>
+- Espacio de estados de FNCER mediante el método PEM (2m+1).<br>
+- Tabla de escenarios y pesos asociados.
+</p>
+
+<p align="justify">
+Esta estructura permite verificar la correcta configuración del escenario y la convergencia estadística del estimador.
+</p>
 
 ---
 

@@ -20,7 +20,7 @@ p_max = 2850;
 dn = 1;
 
 % Realizaciones objetivo de Monte Carlo
-r = 500000;
+r_max = 500000;
 
 % Error relativo máximo permitido
 eps = 0.05;
@@ -106,11 +106,11 @@ disp(LD);
 factor_demanda = 1;
 
 case_name = sprintf('HL-I_%s_%s_d%d_r%dk', ...
-    'Base', periodo_str, p_max, round(r/1000));
+    'Base', periodo_str, p_max, round(r_max/1000));
 
 res = SMC_Nivel1(Sn_SYNC, FOR_SYNC, ...
     typeFERNC, Sn_FERNC, CM, VA, Co_FERNC, ...
-    r, eps, LD, dn, case_name, h_period, ...
+    r_max, eps, LD, dn, case_name, h_period, ...
     factor_demanda);
 
 tiempo_total = toc(tStart);

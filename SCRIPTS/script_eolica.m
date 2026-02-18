@@ -20,13 +20,13 @@ p_max = 2850;
 dn = 1;
 
 % Multiplicador de capacidad renovable vs síncrona reemplazada: 1, 2, 3, ...
-factor_cap = 3;
+factor_cap = 1;
 
 % Tipo de variables aleatorias FNCER: 0 = correlacionadas, 1 = independientes
 VA = 1;
 
 % Realizaciones objetivo de Monte Carlo
-r = 500000;
+r_max = 500000;
 
 % Error relativo máximo permitido
 eps = 0.05;
@@ -233,11 +233,11 @@ else
 end
 
 case_name = sprintf('HL-I_%s_%s_fc%d_d%d_r%dk%s', ...
-    'Eolica', periodo_str, factor_cap, p_max, round(r/1000), va_str);
+    'Eolica', periodo_str, factor_cap, p_max, round(r_max/1000), va_str);
 
 res = SMC_Nivel1(Sn_SYNC, FOR_SYNC, ...
     typeFERNC, Sn_FERNC, CM, VA, Co_FERNC, ...
-    r, eps, LD, dn, case_name, h_period, ...
+    r_max, eps, LD, dn, case_name, h_period, ...
     factor_demanda);
 
 tiempo_total = toc(tStart);

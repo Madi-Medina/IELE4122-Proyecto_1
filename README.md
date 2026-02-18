@@ -193,7 +193,7 @@ El framework sigue una arquitectura modular compuesta por:
 | dn | Período del día | 1 = día, 0 = noche |
 | factor_cap | Multiplicador capacidad renovable | 1, 2, 3, ... |
 | VA | Tipo de variables FNCER | 0 = correlacionadas, 1 = independientes |
-| r | Realizaciones objetivo | 10,000 a 500,000 |
+| r_max | Realizaciones objetivo | 10,000 a 500,000 |
 | eps | Error relativo máximo | 0.03 a 0.10 |
 | graficar | Graficar convergencia | true / false |
 

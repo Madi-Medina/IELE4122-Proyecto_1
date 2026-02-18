@@ -94,7 +94,6 @@ Desarrollado en:
 <p align="justify">
 - <strong>MATLAB</strong> (compatible R2022+).<br>
 - Ejecución paralela opcional mediante <code>parpool</code>.<br>
-- Módulos críticos protegidos como <strong>P-code (.p)</strong>.<br>
 - No requiere toolboxes especializados adicionales.
 </p>
 
@@ -126,8 +125,8 @@ El framework sigue una arquitectura modular compuesta por:
 - `Solar.csv`
 
 ### FUNCIONES/
-- `SMC_Nivel1.p`
-- `PEM.p`
+- `SMC_Nivel1.m`
+- `PEM.m`
 - `Generacion_eolica.m`
 - `Generacion_solar.m`
 - `calcular_dns_escenario.m`
@@ -156,10 +155,10 @@ El framework sigue una arquitectura modular compuesta por:
 
 | Archivo | Descripción |
 |----------|------------|
-| `SMC_Nivel1.p` | Motor principal de simulación Monte Carlo HL-I |
+| `SMC_Nivel1.m` | Motor principal de simulación Monte Carlo HL-I |
 | `Generacion_eolica.m` | Modelado estadístico de generación eólica |
 | `Generacion_solar.m` | Modelado estadístico de generación solar |
-| `PEM.p` | Implementación del método Point Estimate Method (2m+1) |
+| `PEM.m` | Implementación del método Point Estimate Method (2m+1) |
 | `Histograma_carga.m` | Construcción del modelo probabilístico de demanda |
 | `calcular_dns_escenario.m` | Cálculo del DNS ponderado por escenario |
 | `bi2de.m` | Conversión vector binario → decimal |

@@ -93,7 +93,6 @@ Desarrollado en:
 
 <p align="justify">
 - <strong>MATLAB</strong> (compatible R2022+).<br>
-- Ejecución paralela opcional mediante <code>parpool</code>.<br>
 - No requiere toolboxes especializados adicionales.
 </p>
 
